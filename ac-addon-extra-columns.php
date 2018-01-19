@@ -84,6 +84,10 @@ final class ACA_Extra_Columns {
 		if ( $list_screen instanceof AC_ListScreen_Post ) {
 			$list_screen->register_column_types_from_dir( ac_addon_extra_columns()->get_plugin_dir() . 'classes/Column/Post', self::CLASS_PREFIX );
 		}
+
+		if ( $list_screen instanceof AC_ListScreen_User ) {
+			$list_screen->register_column_types_from_dir( ac_addon_extra_columns()->get_plugin_dir() . 'classes/Column/User', self::CLASS_PREFIX );
+		}
 	}
 
 	/**
@@ -143,6 +147,7 @@ final class ACA_Extra_Columns {
 		$columns = array();
 		$dirs = array(
 			ac_addon_extra_columns()->get_plugin_dir() . 'classes/Column/Post',
+			ac_addon_extra_columns()->get_plugin_dir() . 'classes/Column/User',
 		);
 
 		foreach ( $dirs as $dir ) {

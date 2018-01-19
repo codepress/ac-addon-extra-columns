@@ -41,7 +41,7 @@ class ACA_Extra_Columns_Admin_Page_ExperimentalColumns extends AC_Admin_Page {
 
 								<p>
 									<label for="show_edit_button">
-										<input name="<?php echo esc_attr( self::SETTINGS_NAME ); ?>[]" type="checkbox" value="<?php echo $type; ?>" <?php checked( in_array( $type, get_option( self::SETTINGS_NAME ) ) ); ?>>
+										<input name="<?php echo esc_attr( self::SETTINGS_NAME ); ?>[]" type="checkbox" value="<?php echo $type; ?>" <?php checked( in_array( $type, (array) get_option( self::SETTINGS_NAME ) ) ); ?>>
 										<?php echo esc_html( $label ); ?>
 									</label>
 								</p>
