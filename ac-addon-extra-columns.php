@@ -26,7 +26,7 @@ final class ACA_Extra_Columns {
 	private static $_instance = null;
 
 	/**
-	 * @var ACA_NinjaForms
+	 * @var ACA_Extra_Columns
 	 */
 	public static function instance() {
 		if ( is_null( self::$_instance ) ) {
@@ -88,13 +88,17 @@ final class ACA_Extra_Columns {
 		if ( $list_screen instanceof AC_ListScreen_User ) {
 			$list_screen->register_column_types_from_dir( ac_addon_extra_columns()->get_plugin_dir() . 'classes/Column/User', self::CLASS_PREFIX );
 		}
+
+		if ( $list_screen instanceof ACA_WC_ListScreen_ShopOrder ) {
+			$list_screen->register_column_types_from_dir( ac_addon_extra_columns()->get_plugin_dir() . 'classes/Column/ShopOrder', self::CLASS_PREFIX );
+		}
 	}
 
 	/**
 	 * @param AC_Groups $groups
 	 */
 	public function register_column_group( $groups ) {
-		$groups->register_group( 'experimental', 'Expirimental' );
+		$groups->register_group( 'experimental', 'Experimental' );
 	}
 
 	public function get_basename() {
@@ -147,6 +151,7 @@ final class ACA_Extra_Columns {
 		$columns = array();
 		$dirs = array(
 			ac_addon_extra_columns()->get_plugin_dir() . 'classes/Column/Post',
+			ac_addon_extra_columns()->get_plugin_dir() . 'classes/Column/ShopOrder',
 			ac_addon_extra_columns()->get_plugin_dir() . 'classes/Column/User',
 		);
 
