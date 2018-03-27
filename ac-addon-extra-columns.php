@@ -64,6 +64,8 @@ final class ACA_Extra_Columns {
 
 		add_action( 'ac/admin_pages', array( $this, 'register_pages' ) );
 
+		add_action( 'ac/list_screens', array( $this, 'register_list_screens' ) );
+
 		$this->set_available_extra_columns();
 	}
 
@@ -188,6 +190,18 @@ final class ACA_Extra_Columns {
 	 */
 	public function register_pages( $pages ) {
 		$pages->register_page( new ACA_Extra_Columns_Admin_Page_ExperimentalColumns() );
+	}
+
+	/**
+	 * Register list screens
+	 */
+	public function register_list_screens() {
+
+		// List Screen for Profile Builder Pro
+		if ( function_exists( 'wppb_plugin_init' ) ) {
+			AC()->register_list_screen( new ACA_Extra_Columns_ListScreen_AdminApproval() );
+		}
+
 	}
 
 }
