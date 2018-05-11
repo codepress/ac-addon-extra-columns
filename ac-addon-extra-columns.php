@@ -63,6 +63,7 @@ final class ACA_Extra_Columns {
 		add_action( 'acp/column_types', array( $this, 'register_columns' ) );
 
 		add_action( 'ac/admin_pages', array( $this, 'register_pages' ) );
+		AC()->admin()->get_pages()->register_page( new ACA_Extra_Columns_Admin_Page_ExperimentalColumns() );
 
 		add_action( 'ac/list_screens', array( $this, 'register_list_screens' ) );
 
@@ -93,6 +94,10 @@ final class ACA_Extra_Columns {
 
 		if ( $list_screen instanceof ACA_WC_ListScreen_ShopOrder ) {
 			$list_screen->register_column_types_from_dir( ac_addon_extra_columns()->get_plugin_dir() . 'classes/Column/ShopOrder', self::CLASS_PREFIX );
+		}
+
+		if ( $list_screen instanceof AC_ListScreen_Comment ) {
+			$list_screen->register_column_types_from_dir( ac_addon_extra_columns()->get_plugin_dir() . 'classes/Column/Comment', self::CLASS_PREFIX );
 		}
 	}
 
@@ -155,6 +160,7 @@ final class ACA_Extra_Columns {
 			ac_addon_extra_columns()->get_plugin_dir() . 'classes/Column/Post',
 			ac_addon_extra_columns()->get_plugin_dir() . 'classes/Column/ShopOrder',
 			ac_addon_extra_columns()->get_plugin_dir() . 'classes/Column/User',
+			ac_addon_extra_columns()->get_plugin_dir() . 'classes/Column/Comment',
 		);
 
 		foreach ( $dirs as $dir ) {
@@ -183,13 +189,6 @@ final class ACA_Extra_Columns {
 		}
 
 		return $column_types;
-	}
-
-	/**
-	 * @param AC_Admin_Pages $pages
-	 */
-	public function register_pages( $pages ) {
-		$pages->register_page( new ACA_Extra_Columns_Admin_Page_ExperimentalColumns() );
 	}
 
 	/**
