@@ -1,6 +1,9 @@
 <?php
+namespace ACA\ExtraColumns\Setting;
 
-class ACA_Extra_Columns_Setting_UserTaxonomy extends AC_Settings_Column_Taxonomy {
+use AC;
+
+class UserTaxonomy extends AC\Settings\Column\Taxonomy {
 
 	/**
 	 * @var string
@@ -12,7 +15,7 @@ class ACA_Extra_Columns_Setting_UserTaxonomy extends AC_Settings_Column_Taxonomy
 	}
 
 	/**
-	 * @return AC_View
+	 * @return AC\View
 	 */
 	public function create_view() {
 		$taxonomy = $this->create_element( 'select', 'taxonomy' );
@@ -21,7 +24,7 @@ class ACA_Extra_Columns_Setting_UserTaxonomy extends AC_Settings_Column_Taxonomy
 		         ->set_attribute( 'data-label', 'update' )
 		         ->set_attribute( 'data-refresh', 'column' );
 
-		return new AC_View( array(
+		return new AC\View( array(
 			'setting' => $taxonomy,
 			'label'   => __( 'Taxonomy', 'codepress-admin-columns' ),
 		) );

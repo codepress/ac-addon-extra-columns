@@ -1,6 +1,10 @@
 <?php
+namespace ACA\ExtraColumns\Column\Comment;
 
-class ACA_Extra_Columns_Column_Comment_PostCategory extends ACA_Extra_Columns_Column_Experimental {
+use ACA\ExtraColumns\Column;
+
+
+class PostCategory extends Column\Experimental {
 
 	public function __construct() {
 		parent::__construct();

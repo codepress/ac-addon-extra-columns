@@ -1,6 +1,9 @@
 <?php
+namespace ACA\ExtraColumns\Column;
 
-class ACA_Extra_Columns_Column_Experimental extends AC_Column {
+use AC;
+
+class Experimental extends AC\Column {
 
 	public function __construct() {
 		$this->set_group( 'experimental' );

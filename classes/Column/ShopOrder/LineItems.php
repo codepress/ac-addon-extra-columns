@@ -1,10 +1,12 @@
 <?php
 
-/**
- * @since 4.0
- */
-class ACA_Extra_Columns_Column_ShopOrder_LineItems extends ACA_Extra_Columns_Column_Experimental
-	implements ACP_Export_Column {
+namespace ACA\ExtraColumns\Column\ShopOrder;
+
+use ACA\ExtraColumns\Column;
+use ACP;
+
+class LineItems extends Column\Experimental
+	implements ACP\Export\Exportable {
 
 	public function __construct() {
 		parent::__construct();
@@ -14,7 +16,7 @@ class ACA_Extra_Columns_Column_ShopOrder_LineItems extends ACA_Extra_Columns_Col
 	}
 
 	public function get_value( $id ) {
-		/** @var WC_Order_Item_Product[] $items */
+		/** @var \WC_Order_Item_Product[] $items */
 		$items = $this->get_raw_value( $id );
 		$line_items = array();
 
@@ -26,14 +28,14 @@ class ACA_Extra_Columns_Column_ShopOrder_LineItems extends ACA_Extra_Columns_Col
 	}
 
 	public function get_raw_value( $id ) {
-		$order = new WC_Order( $id );
+		$order = new \WC_Order( $id );
 		$items = $order->get_items();
 
 		return $items;
 	}
 
 	public function export() {
-		return new ACP_Export_Model_StrippedValue( $this );
+		return new ACP\Export\Model\StrippedValue( $this );
 	}
 
 }

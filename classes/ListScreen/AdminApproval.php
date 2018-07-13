@@ -1,6 +1,10 @@
 <?php
 
-class ACA_Extra_Columns_ListScreen_AdminApproval extends AC_ListScreen_User {
+namespace ACA\ExtraColumns\ListScreen;
+
+use AC;
+
+class AdminApproval extends AC\ListScreen\User {
 
 	public function __construct() {
 		parent::__construct();
@@ -28,6 +32,6 @@ class ACA_Extra_Columns_ListScreen_AdminApproval extends AC_ListScreen_User {
 	}
 
 	public function get_list_table() {
-		return new wpp_list_approved_unapproved_users();
+		return new \wpp_list_approved_unapproved_users();
 	}
 }

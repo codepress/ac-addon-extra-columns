@@ -1,9 +1,10 @@
 <?php
 
-/**
- * @since 4.0
- */
-class ACA_Extra_Columns_Column_Post_Test extends ACA_Extra_Columns_Column_Experimental {
+namespace ACA\ExtraColumns\Column\Post;
+
+use ACA\ExtraColumns\Column;
+
+class Test extends Column\Experimental {
 
 	public function __construct() {
 		parent::__construct();

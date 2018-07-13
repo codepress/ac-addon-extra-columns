@@ -1,6 +1,9 @@
 <?php
+namespace ACA\ExtraColumns\Admin\Page;
 
-class ACA_Extra_Columns_Admin_Page_ExperimentalColumns extends AC_Admin_Page {
+use AC;
+
+class ExperimentalColumns extends AC\Admin\Page {
 
 	const SETTINGS_NAME = 'ac_active_extra_columns';
 

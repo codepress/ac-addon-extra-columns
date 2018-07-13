@@ -1,7 +1,13 @@
 <?php
 
-class ACA_Extra_Columns_Column_User_Taxonomy extends AC_Column_Taxonomy
-	implements ACP_Export_Column, ACP_Column_EditingInterface {
+namespace ACA\ExtraColumns\Column\User;
+
+use ACA\ExtraColumns\Setting;
+use AC;
+use ACP;
+
+class Taxonomy extends AC\Column\Taxonomy
+	implements ACP\Export\Exportable, ACP\Editing\Editable {
 
 	public function __construct() {
 		parent::__construct();
@@ -17,15 +23,15 @@ class ACA_Extra_Columns_Column_User_Taxonomy extends AC_Column_Taxonomy
 	}
 
 	public function register_settings() {
-		$this->add_setting( new ACA_Extra_Columns_Setting_UserTaxonomy( $this ) );
+		$this->add_setting( new Setting\UserTaxonomy( $this ) );
 	}
 
 	public function export() {
-		return new ACP_Export_Model_Post_Taxonomy( $this );
+		return new ACP\Export\Model\Post\Taxonomy( $this );
 	}
 
 	public function editing() {
-		return new ACP_Editing_Model_Post_Taxonomy( $this );
+		return new ACP\Editing\Model\Post\Taxonomy( $this );
 	}
 
 }
