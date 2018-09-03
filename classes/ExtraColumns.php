@@ -48,6 +48,11 @@ final class ExtraColumns extends AC\Plugin {
 			$list_screen->register_column_types_from_dir( 'ACA\ExtraColumns\Column\Post' );
 		}
 
+		if ( $list_screen instanceof AC\ListScreen\Media ) {
+			$list_screen->register_column_types_from_dir( 'ACA\ExtraColumns\Column\Post' );
+			$list_screen->register_column_types_from_dir( 'ACA\ExtraColumns\Column\Media' );
+		}
+
 		if ( $list_screen instanceof AC\ListScreen\User ) {
 			$list_screen->register_column_types_from_dir( 'ACA\ExtraColumns\Column\User' );
 		}
@@ -77,14 +82,17 @@ final class ExtraColumns extends AC\Plugin {
 		$columns = array();
 		$dirs = array(
 			'ACA\ExtraColumns\Column\Post',
+			'ACA\ExtraColumns\Column\Media',
 			'ACA\ExtraColumns\Column\ShopOrder',
 			'ACA\ExtraColumns\Column\User',
 			'ACA\ExtraColumns\Column\Comment',
 		);
+
 		foreach ( $dirs as $dir ) {
 			$columns = array_merge( $columns, $this->get_column_types_from_dir( $dir ) );
 		}
-		$this->columns = (array) $columns;
+
+		$this->columns = $columns;
 	}
 
 	/**
