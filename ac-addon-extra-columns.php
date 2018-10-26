@@ -14,7 +14,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 define( 'ACA_EXTRA_COLUMNS_FILE', __FILE__ );
 
-require_once 'classes/Dependencies.php';
+require_once __DIR__ . '/classes/Dependencies.php';
 
 function aca_extra_columns_init() {
 	$dependencies = new ACA_Extra_Columns_Dependencies( plugin_basename( ACA_EXTRA_COLUMNS_FILE ) );

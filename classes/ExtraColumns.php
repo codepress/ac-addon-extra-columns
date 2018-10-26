@@ -4,6 +4,7 @@ namespace ACA\ExtraColumns;
 
 use AC;
 use ACA\WC;
+use ACP;
 
 final class ExtraColumns extends AC\Plugin {
 
@@ -61,6 +62,10 @@ final class ExtraColumns extends AC\Plugin {
 			$list_screen->register_column_types_from_dir( 'ACA\ExtraColumns\Column\ShopOrder' );
 		}
 
+		if ( $list_screen instanceof ACP\ListScreen\Taxonomy ) {
+			$list_screen->register_column_types_from_dir( 'ACA\ExtraColumns\Column\Taxonomy' );
+		}
+
 		if ( $list_screen instanceof AC\ListScreen\Comment ) {
 			$list_screen->register_column_types_from_dir( 'ACA\ExtraColumns\Column\Comment' );
 		}
@@ -85,6 +90,7 @@ final class ExtraColumns extends AC\Plugin {
 			'ACA\ExtraColumns\Column\Media',
 			'ACA\ExtraColumns\Column\ShopOrder',
 			'ACA\ExtraColumns\Column\User',
+			'ACA\ExtraColumns\Column\Taxonomy',
 			'ACA\ExtraColumns\Column\Comment',
 		);
 
