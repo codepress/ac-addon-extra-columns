@@ -23,7 +23,7 @@ final class ExtraColumns extends AC\Plugin {
 		add_action( 'ac/column_groups', array( $this, 'register_column_group' ) );
 		add_action( 'acp/column_types', array( $this, 'register_columns' ) );
 
-		AC()->admin()->get_pages()->register_page( new Admin\Page\ExperimentalColumns() );
+		AC()->admin()->register_page( new Admin\Page\ExperimentalColumns() );
 	}
 
 	protected function get_file() {

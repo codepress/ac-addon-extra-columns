@@ -10,21 +10,12 @@ class ExperimentalColumns extends AC\Admin\Page {
 	const SETTINGS_GROUP = 'ac-general-extra-columns';
 
 	public function __construct() {
-		$this
-			->set_slug( 'experimental-columns' )
-			->set_label( __( 'Experimental Columns', 'codepress-admin-columns' ) );
+		parent::__construct( self::SETTINGS_NAME, __( 'Experimental Columns', 'codepress-admin-columns' ) );
 
 		register_setting( self::SETTINGS_GROUP, self::SETTINGS_NAME );
-
 	}
 
-	public function handle_store_active_columns() {
-		if ( ! $this->is_current_screen() ) {
-			return;
-		}
-	}
-
-	public function display() {
+	public function render() {
 		$available_columns = ac_addon_extra_columns()->get_available_extra_columns();
 		?>
 		<table class="form-table ac-form-table">
