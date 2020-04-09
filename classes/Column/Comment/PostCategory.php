@@ -1,8 +1,8 @@
 <?php
+
 namespace ACA\ExtraColumns\Column\Comment;
 
 use ACA\ExtraColumns\Column;
-
 
 class PostCategory extends Column\Experimental {
 

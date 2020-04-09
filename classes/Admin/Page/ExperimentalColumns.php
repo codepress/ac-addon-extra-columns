@@ -1,4 +1,5 @@
 <?php
+
 namespace ACA\ExtraColumns\Admin\Page;
 
 use AC;
@@ -34,9 +35,9 @@ class ExperimentalColumns extends AC\Admin\Page {
 							<?php foreach ( $available_columns as $type => $label ): ?>
 
 								<p>
-									<label for="show_edit_button">
-										<input name="<?php echo esc_attr( self::SETTINGS_NAME ); ?>[]" type="checkbox" value="<?php echo $type; ?>" <?php checked( in_array( $type, (array) get_option( self::SETTINGS_NAME ) ) ); ?>>
-										<?php echo esc_html( $label ); ?>
+									<label for="show_edit_button_<?= esc_attr( sanitize_key( $type ) ); ?>">
+										<input id="show_edit_button_<?= esc_attr( sanitize_key( $type ) ); ?>" name="<?= esc_attr( self::SETTINGS_NAME ); ?>[]" type="checkbox" value="<?= $type; ?>" <?php checked( in_array( $type, (array) get_option( self::SETTINGS_NAME ) ) ); ?>>
+										<?= esc_html( $label ); ?>
 									</label>
 								</p>
 

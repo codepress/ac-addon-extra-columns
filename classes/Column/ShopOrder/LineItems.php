@@ -4,6 +4,8 @@ namespace ACA\ExtraColumns\Column\ShopOrder;
 
 use ACA\ExtraColumns\Column;
 use ACP;
+use WC_Order;
+use WC_Order_Item_Product;
 
 class LineItems extends Column\Experimental
 	implements ACP\Export\Exportable {
@@ -16,9 +18,9 @@ class LineItems extends Column\Experimental
 	}
 
 	public function get_value( $id ) {
-		/** @var \WC_Order_Item_Product[] $items */
+		/** @var WC_Order_Item_Product[] $items */
 		$items = $this->get_raw_value( $id );
-		$line_items = array();
+		$line_items = [];
 
 		foreach ( $items as $item ) {
 			$line_items[] = sprintf( '<strong>%sx</strong> %s', $item->get_quantity(), $item->get_name() );
@@ -28,7 +30,7 @@ class LineItems extends Column\Experimental
 	}
 
 	public function get_raw_value( $id ) {
-		$order = new \WC_Order( $id );
+		$order = new WC_Order( $id );
 		$items = $order->get_items();
 
 		return $items;

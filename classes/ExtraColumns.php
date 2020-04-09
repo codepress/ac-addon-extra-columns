@@ -20,10 +20,10 @@ final class ExtraColumns extends AC\Plugin {
 	}
 
 	public function register() {
-		add_action( 'ac/column_groups', array( $this, 'register_column_group' ) );
-		add_action( 'acp/column_types', array( $this, 'register_columns' ) );
+		add_action( 'ac/column_groups', [ $this, 'register_column_group' ] );
+		add_action( 'acp/column_types', [ $this, 'register_columns' ] );
 
-		AC()->admin()->register_page( new Admin\Page\ExperimentalColumns() );
+		AC()->admin()->add_page( new Admin\Page\ExperimentalColumns() );
 	}
 
 	protected function get_file() {
@@ -84,15 +84,15 @@ final class ExtraColumns extends AC\Plugin {
 	}
 
 	public function set_available_extra_columns() {
-		$columns = array();
-		$dirs = array(
+		$columns = [];
+		$dirs = [
 			'ACA\ExtraColumns\Column\Post',
 			'ACA\ExtraColumns\Column\Media',
 			'ACA\ExtraColumns\Column\ShopOrder',
 			'ACA\ExtraColumns\Column\User',
 			'ACA\ExtraColumns\Column\Taxonomy',
 			'ACA\ExtraColumns\Column\Comment',
-		);
+		];
 
 		foreach ( $dirs as $dir ) {
 			$columns = array_merge( $columns, $this->get_column_types_from_dir( $dir ) );

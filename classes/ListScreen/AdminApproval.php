@@ -3,6 +3,7 @@
 namespace ACA\ExtraColumns\ListScreen;
 
 use AC;
+use wpp_list_approved_unapproved_users;
 
 class AdminApproval extends AC\ListScreen\User {
 
@@ -17,7 +18,7 @@ class AdminApproval extends AC\ListScreen\User {
 	}
 
 	public function get_screen_link() {
-		return add_query_arg( array( 'page' => $this->get_page(), 'layout' => $this->get_layout_id() ), $this->get_admin_url() );
+		return add_query_arg( [ 'page' => $this->get_page(), 'layout' => $this->get_layout_id() ], $this->get_admin_url() );
 	}
 
 	/**
@@ -32,6 +33,6 @@ class AdminApproval extends AC\ListScreen\User {
 	}
 
 	public function get_list_table() {
-		return new \wpp_list_approved_unapproved_users();
+		return new wpp_list_approved_unapproved_users();
 	}
 }

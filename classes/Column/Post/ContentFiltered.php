@@ -2,8 +2,8 @@
 
 namespace ACA\ExtraColumns\Column\Post;
 
-use ACA\ExtraColumns\Column;
 use AC;
+use ACA\ExtraColumns\Column;
 
 class ContentFiltered extends Column\Experimental {
 

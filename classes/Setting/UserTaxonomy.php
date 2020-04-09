@@ -1,4 +1,5 @@
 <?php
+
 namespace ACA\ExtraColumns\Setting;
 
 use AC;
@@ -11,7 +12,7 @@ class UserTaxonomy extends AC\Settings\Column\Taxonomy {
 	private $taxonomy;
 
 	protected function define_options() {
-		return array( 'taxonomy' );
+		return [ 'taxonomy' ];
 	}
 
 	/**
@@ -24,10 +25,10 @@ class UserTaxonomy extends AC\Settings\Column\Taxonomy {
 		         ->set_attribute( 'data-label', 'update' )
 		         ->set_attribute( 'data-refresh', 'column' );
 
-		return new AC\View( array(
+		return new AC\View( [
 			'setting' => $taxonomy,
 			'label'   => __( 'Taxonomy', 'codepress-admin-columns' ),
-		) );
+		] );
 	}
 
 	/**

@@ -2,8 +2,8 @@
 
 namespace ACA\ExtraColumns\Column\User;
 
-use ACA\ExtraColumns\Setting;
 use AC;
+use ACA\ExtraColumns\Setting;
 use ACP;
 
 class Taxonomy extends AC\Column\Taxonomy

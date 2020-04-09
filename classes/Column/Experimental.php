@@ -1,4 +1,5 @@
 <?php
+
 namespace ACA\ExtraColumns\Column;
 
 use AC;
