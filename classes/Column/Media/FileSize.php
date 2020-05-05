@@ -4,6 +4,7 @@ namespace ACA\ExtraColumns\Column\Media;
 
 use AC;
 use ACP\Sorting;
+use ACP\Sorting\Type\DataType;
 
 class FileSize extends AC\Column\Meta
 	implements Sorting\Sortable {
@@ -46,10 +47,7 @@ class FileSize extends AC\Column\Meta
 	}
 
 	public function sorting() {
-		$model = new Sorting\Model\Meta( $this );
-		$model->set_data_type( 'numeric' );
-
-		return $model;
+		return new Sorting\Model\MetaData( $this->get_meta_key(), $this, new DataType( DataType::NUMERIC ) );
 	}
 
 }
