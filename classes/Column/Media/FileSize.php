@@ -47,7 +47,7 @@ class FileSize extends AC\Column\Meta
 	}
 
 	public function sorting() {
-		return new Sorting\Model\MetaData( $this->get_meta_key(), $this, new DataType( DataType::NUMERIC ) );
+		return new Sorting\Model\Post\Meta( $this->get_meta_key() );
 	}
 
 }
