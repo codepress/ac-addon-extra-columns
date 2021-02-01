@@ -22,6 +22,7 @@ final class ExtraColumns extends AC\Plugin {
 	public function register() {
 		add_action( 'ac/column_groups', [ $this, 'register_column_group' ] );
 		add_action( 'acp/column_types', [ $this, 'register_columns' ] );
+		add_action( 'ac/list_screens', [ $this, 'register_list_screens' ] );
 
 		AC()->admin()->add_page( new Admin\Page\ExperimentalColumns() );
 	}
@@ -74,13 +75,14 @@ final class ExtraColumns extends AC\Plugin {
 	/**
 	 * Register list screens
 	 */
-	public function register_list_screens() {
+	public function register_list_screens( AC\ListScreens $list_screens ) {
+
+		$list_screens->register_list_screen( new ListScreen\BuddyPressActivities() );
 
 		// List Screen for Profile Builder Pro
 		if ( function_exists( 'wppb_plugin_init' ) ) {
-			AC()->register_list_screen( new ListScreen\AdminApproval() );
+			$list_screens->register_list_screen( new ListScreen\AdminApproval() );
 		}
-
 	}
 
 	public function set_available_extra_columns() {
