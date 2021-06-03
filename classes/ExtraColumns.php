@@ -3,6 +3,7 @@
 namespace ACA\ExtraColumns;
 
 use AC;
+use ACA\ExtraColumns\Admin\Page\ExperimentalColumns;
 use ACA\WC;
 use ACP;
 
@@ -24,7 +25,26 @@ final class ExtraColumns extends AC\Plugin {
 		add_action( 'acp/column_types', [ $this, 'register_columns' ] );
 		add_action( 'ac/list_screens', [ $this, 'register_list_screens' ] );
 
-		AC()->admin()->add_page( new Admin\Page\ExperimentalColumns() );
+		if ( interface_exists( 'AC\PageRequestHandler' ) ) {
+			add_action( 'ac/admin/menu', [ $this, 'add_menu_item' ] );
+			add_filter( 'ac/admin/request/page', [ $this, 'handle_page_request' ], 10, 2 );
+		}
+
+		register_setting( ExperimentalColumns::SETTINGS_GROUP, ExperimentalColumns::SETTINGS_NAME );
+	}
+
+	public function add_menu_item( AC\Admin\Menu $menu ) {
+		$menu->add_item(
+			ExperimentalColumns::SETTINGS_NAME, __( 'Experimental Columns', 'codepress-admin-columns' )
+		);
+	}
+
+	public function handle_page_request( $page, AC\Request $request ) {
+		if ( ExperimentalColumns::SETTINGS_NAME === $request->get( AC\PageRequestHandler::PARAM_TAB ) ) {
+			$page = new ExperimentalColumns();
+		}
+
+		return $page;
 	}
 
 	protected function get_file() {

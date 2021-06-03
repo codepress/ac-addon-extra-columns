@@ -1,0 +1,18 @@
+# OS
+.DS_Stor*
+._*
+.env
+.Spotlight-V100
+.Trashes
+Icon
+ehthumbs.d*
+Thumbs.d*
+/.idea*
+
+# Project specific
+*.scssc
+*.map
+
+# Development
+node_modules
+bower_components

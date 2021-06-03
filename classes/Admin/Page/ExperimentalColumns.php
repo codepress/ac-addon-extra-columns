@@ -11,9 +11,7 @@ class ExperimentalColumns extends AC\Admin\Page {
 	const SETTINGS_GROUP = 'ac-general-extra-columns';
 
 	public function __construct() {
-		parent::__construct( self::SETTINGS_NAME, __( 'Experimental Columns', 'codepress-admin-columns' ) );
-
-		register_setting( self::SETTINGS_GROUP, self::SETTINGS_NAME );
+		parent::__construct( self::SETTINGS_NAME );
 	}
 
 	public function render() {
