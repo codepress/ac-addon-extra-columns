@@ -4,7 +4,7 @@ namespace ACA\ExtraColumns;
 
 /**
  * Show a notice when plugin dependencies are not met
- * @version 1.4.1
+ * @version 1.6
  */
 final class Dependencies {
 
@@ -226,27 +226,27 @@ final class Dependencies {
 
 		?>
 
-		<tr class="plugin-update-tr <?= $this->is_plugin_active() ? 'active' : 'inactive'; ?>">
-			<td colspan="3" class="plugin-update colspanchange">
-				<div class="update-message notice inline notice-error notice-alt">
+        <tr class="plugin-update-tr <?= $this->is_plugin_active() ? 'active' : 'inactive'; ?>">
+            <td colspan="auto" class="plugin-update colspanchange">
+                <div class="update-message notice inline notice-error notice-alt">
 					<?php if ( count( $this->messages ) > 1 )  : ?>
-						<p>
+                        <p>
 							<?php echo $intro . ':' ?>
-						</p>
+                        </p>
 
-						<ul>
+                        <ul>
 							<?php foreach ( $this->messages as $message ) : ?>
-								<li><?php echo $message; ?></li>
+                                <li><?php echo $message; ?></li>
 							<?php endforeach; ?>
-						</ul>
+                        </ul>
 					<?php else : ?>
-						<p>
+                        <p>
 							<?php echo $intro . ' ' . current( $this->messages ); ?>
-						</p>
+                        </p>
 					<?php endif; ?>
-				</div>
-			</td>
-		</tr>
+                </div>
+            </td>
+        </tr>
 
 		<?php
 	}
@@ -257,12 +257,12 @@ final class Dependencies {
 	public function display_notice_css() {
 		?>
 
-		<style>
-			.plugins tr[data-plugin='<?php echo $this->basename; ?>'] th,
-			.plugins tr[data-plugin='<?php echo $this->basename; ?>'] td {
-				box-shadow: none;
-			}
-		</style>
+        <style>
+            .plugins tr[data-plugin='<?php echo $this->basename; ?>'] th,
+            .plugins tr[data-plugin='<?php echo $this->basename; ?>'] td {
+                box-shadow: none;
+            }
+        </style>
 
 		<?php
 	}

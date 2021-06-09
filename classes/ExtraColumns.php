@@ -25,10 +25,8 @@ final class ExtraColumns extends AC\Plugin {
 		add_action( 'acp/column_types', [ $this, 'register_columns' ] );
 		add_action( 'ac/list_screens', [ $this, 'register_list_screens' ] );
 
-		if ( interface_exists( 'AC\PageRequestHandler' ) ) {
-			add_action( 'ac/admin/menu', [ $this, 'add_menu_item' ] );
-			add_filter( 'ac/admin/request/page', [ $this, 'handle_page_request' ], 10, 2 );
-		}
+		add_action( 'ac/admin/page/menu', [ $this, 'add_menu_item' ] );
+		add_filter( 'ac/admin/page/main', [ $this, 'handle_page_request' ], 10, 2 );
 
 		register_setting( ExperimentalColumns::SETTINGS_GROUP, ExperimentalColumns::SETTINGS_NAME );
 	}
@@ -39,12 +37,12 @@ final class ExtraColumns extends AC\Plugin {
 		);
 	}
 
-	public function handle_page_request( $page, AC\Request $request ) {
-		if ( ExperimentalColumns::SETTINGS_NAME === $request->get( AC\PageRequestHandler::PARAM_TAB ) ) {
-			$page = new ExperimentalColumns();
+	public function handle_page_request( $main, $name ) {
+		if ( ExperimentalColumns::SETTINGS_NAME === $name ) {
+			$main = new ExperimentalColumns();
 		}
 
-		return $page;
+		return $main;
 	}
 
 	protected function get_file() {
