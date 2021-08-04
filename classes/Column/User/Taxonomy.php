@@ -31,7 +31,7 @@ class Taxonomy extends AC\Column\Taxonomy
 	}
 
 	public function editing() {
-		return new ACP\Editing\Model\Post\Taxonomy( $this );
+		return new ACP\Editing\Service\Post\Taxonomy( $this->get_taxonomy(), true );
 	}
 
 }
