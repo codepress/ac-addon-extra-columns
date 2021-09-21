@@ -3,6 +3,7 @@
 namespace ACA\ExtraColumns;
 
 use AC;
+use AC\Admin\RequestHandler;
 use ACA\ExtraColumns\Admin\Page\ExperimentalColumns;
 use ACA\WC;
 use ACP;
@@ -17,7 +18,7 @@ final class ExtraColumns extends AC\Plugin {
 	protected $file;
 
 	public function __construct( $file ) {
-		$this->file = $file;
+		parent::__construct( $file, 'aca_extra_columns' );
 	}
 
 	public function register() {
@@ -26,31 +27,36 @@ final class ExtraColumns extends AC\Plugin {
 		add_action( 'ac/list_screens', [ $this, 'register_list_screens' ] );
 
 		add_action( 'ac/admin/page/menu', [ $this, 'add_menu_item' ] );
-		add_filter( 'ac/admin/page/main', [ $this, 'handle_page_request' ], 10, 2 );
+		add_filter( 'ac/admin/request/page', [ $this, 'handle_page_request' ], 10, 2 );
+		//
 
 		register_setting( ExperimentalColumns::SETTINGS_GROUP, ExperimentalColumns::SETTINGS_NAME );
 	}
 
 	public function add_menu_item( AC\Admin\Menu $menu ) {
+		$url = add_query_arg(
+			[
+				RequestHandler::PARAM_PAGE => AC\Admin\Admin::NAME,
+				RequestHandler::PARAM_TAB  => ExperimentalColumns::SETTINGS_NAME,
+			],
+			admin_url( 'options-general.php' )
+		);
+
 		$menu->add_item(
-			ExperimentalColumns::SETTINGS_NAME, __( 'Experimental Columns', 'codepress-admin-columns' )
+			new AC\Admin\Menu\Item( ExperimentalColumns::SETTINGS_NAME, $url, __( 'Experimental Columns', 'codepress-admin-columns' ) )
 		);
 	}
 
-	public function handle_page_request( $main, $name ) {
-		if ( ExperimentalColumns::SETTINGS_NAME === $name ) {
-			$main = new ExperimentalColumns();
+	public function handle_page_request( $page, $request ) {
+		if ( ExperimentalColumns::SETTINGS_NAME === $request->get( 'tab' ) ) {
+			$page = new ExperimentalColumns();
 		}
 
-		return $main;
+		return $page;
 	}
 
 	protected function get_file() {
 		return $this->file;
-	}
-
-	protected function get_version_key() {
-		return 'aca_extra_columns';
 	}
 
 	/**

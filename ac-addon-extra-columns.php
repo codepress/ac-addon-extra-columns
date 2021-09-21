@@ -21,8 +21,8 @@ define( 'ACA_EXTRA_COLUMNS_FILE', __FILE__ );
 require_once __DIR__ . '/classes/Dependencies.php';
 
 add_action( 'after_setup_theme', function () {
-	$dependencies = new Dependencies( plugin_basename( __FILE__ ), '1.0' );
-	$dependencies->requires_acp( '5.1.7' );
+	$dependencies = new Dependencies( plugin_basename( __FILE__ ), '1.1' );
+	$dependencies->requires_acp( '5.6' );
 	$dependencies->requires_php( '5.6.20' );
 
 	if ( $dependencies->has_missing() ) {
