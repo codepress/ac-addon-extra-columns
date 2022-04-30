@@ -3,6 +3,7 @@
 namespace ACA\ExtraColumns\Column;
 
 use AC;
+use ACA\ExtraColumns\Option\ActiveColumns;
 
 class Experimental extends AC\Column {
 
@@ -11,7 +12,7 @@ class Experimental extends AC\Column {
 	}
 
 	public function is_valid() {
-		return in_array( $this->get_type(), (array) ac_addon_extra_columns()->get_active_extra_columns() );
+		return in_array( $this->get_type(), ( new ActiveColumns() )->get() );
 	}
 
 }

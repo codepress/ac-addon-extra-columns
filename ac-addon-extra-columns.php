@@ -9,6 +9,7 @@ Text Domain: 		codepress-admin-columns
 */
 
 use AC\Autoloader;
+use AC\Plugin\Version;
 use ACA\ExtraColumns\Dependencies;
 use ACA\ExtraColumns\ExtraColumns;
 
@@ -31,10 +32,10 @@ add_action( 'after_setup_theme', function () {
 
 	Autoloader::instance()->register_prefix( 'ACA\ExtraColumns', __DIR__ . '/classes/' );
 
-	$plugin = new ExtraColumns( __FILE__ );
+	$plugin = ac_addon_extra_columns();
 	$plugin->register();
 } );
 
 function ac_addon_extra_columns() {
-	return new ExtraColumns( __FILE__ );
+	return new ExtraColumns( __FILE__, new Version( '1.0' ) );
 }

@@ -12,4 +12,8 @@ class ActiveColumns extends AC\Storage\SiteOption {
 		parent::__construct( self::KEY );
 	}
 
+	public function get( array $args = [] ) {
+		return parent::get( $args ) ?: [];
+	}
+
 }

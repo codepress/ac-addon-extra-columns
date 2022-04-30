@@ -3,6 +3,7 @@
 namespace ACA\ExtraColumns\Column\User;
 
 use AC;
+use ACA\ExtraColumns\Option\ActiveColumns;
 use ACA\ExtraColumns\Setting;
 use ACP;
 
@@ -19,7 +20,7 @@ class Taxonomy extends AC\Column\Taxonomy
 	 * @return bool True when post type has associated taxonomies
 	 */
 	public function is_valid() {
-		return in_array( $this->get_type(), (array) ac_addon_extra_columns()->get_active_extra_columns() );
+		return in_array( $this->get_type(), ( new ActiveColumns() )->get() );
 	}
 
 	public function register_settings() {

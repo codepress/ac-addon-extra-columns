@@ -6,6 +6,7 @@ use AC;
 use AC\Admin\RenderableHead;
 use AC\Renderable;
 use ACA\ExtraColumns\Controller\SaveColumns;
+use ACA\ExtraColumns\Option\ActiveColumns;
 
 class ExperimentalColumns implements Renderable, RenderableHead {
 
@@ -14,16 +15,16 @@ class ExperimentalColumns implements Renderable, RenderableHead {
 	const SETTINGS_GROUP = 'ac-general-extra-columns';
 
 	/**
-	 * @var AC\Storage\SiteOption
+	 * @var ActiveColumns
 	 */
 	private $option;
 
-	public function __construct( AC\Storage\SiteOption $option ) {
+	public function __construct( ActiveColumns $option ) {
 		$this->option = $option;
 	}
 
 	public function render_head() {
-		$setting = ( new AC\Admin\MenuFactory( admin_url( 'options-general.php' ), new AC\IntegrationRepository() ) )->create( self::SETTINGS_NAME );
+		$setting = ( new AC\Admin\MenuFactory( admin_url( 'options-general.php' ), AC()->get_location() ) )->create( self::SETTINGS_NAME );
 
 		echo ( new AC\Admin\View\Menu( $setting ) )->render();
 	}
@@ -32,13 +33,13 @@ class ExperimentalColumns implements Renderable, RenderableHead {
 		ob_start();
 
 		$request = new AC\Request();
-		$active_columns = $this->option->get( [] );
+		$active_columns = $this->option->get();
 		$available_columns = ac_addon_extra_columns()->get_available_extra_columns();
 		?>
 		<section class="ac-settings-box">
 			<h2 class="ac-lined-header">Toggle Extra Columns</h2>
 
-			<form method="post" >
+			<form method="post">
 				<input type="hidden" name="page" value="<?= $request->get( 'page' ) ?>">
 				<input type="hidden" name="tab" value="<?= $request->get( 'tab' ) ?>">
 				<input type="hidden" value="<?= SaveColumns::ACTION ?>" name="ec_action">

@@ -3,8 +3,9 @@
 namespace ACA\ExtraColumns;
 
 use AC;
-use AC\Admin\RequestHandler;
+use AC\Plugin\Version;
 use ACA\ExtraColumns\Admin\Page\ExperimentalColumns;
+use ACA\ExtraColumns\Column;
 use ACA\ExtraColumns\Controller\SaveColumns;
 use ACA\ExtraColumns\Option\ActiveColumns;
 use ACA\WC;
@@ -19,8 +20,8 @@ final class ExtraColumns extends AC\Plugin {
 	 */
 	protected $file;
 
-	public function __construct( $file ) {
-		parent::__construct( $file, 'aca_extra_columns' );
+	public function __construct( $file, Version $version ) {
+		parent::__construct( $file, $version );
 	}
 
 	public function register() {
@@ -48,8 +49,8 @@ final class ExtraColumns extends AC\Plugin {
 	public function add_menu_item( AC\Admin\Menu $menu ) {
 		$url = add_query_arg(
 			[
-				RequestHandler::PARAM_PAGE => AC\Admin\Admin::NAME,
-				RequestHandler::PARAM_TAB  => ExperimentalColumns::SETTINGS_NAME,
+				'page' => AC\Admin\Admin::NAME,
+				'tab'  => ExperimentalColumns::SETTINGS_NAME,
 			],
 			admin_url( 'options-general.php' )
 		);
@@ -83,7 +84,9 @@ final class ExtraColumns extends AC\Plugin {
 	 */
 	public function register_columns( $list_screen ) {
 		if ( $list_screen instanceof AC\ListScreen\Post ) {
-			$list_screen->register_column_types_from_dir( 'ACA\ExtraColumns\Column\Post' );
+			$list_screen->register_column_type( new Column\Post\ContentFiltered() );
+			$list_screen->register_column_type( new Column\Post\SerializedMeta() );
+			$list_screen->register_column_type( new Column\Post\Test() );
 		}
 
 		if ( $list_screen instanceof AC\ListScreen\Media ) {
@@ -140,7 +143,7 @@ final class ExtraColumns extends AC\Plugin {
 	}
 
 	/**
-	 * @param $dir
+	 * @param string $dir
 	 */
 	private function get_column_types_from_dir( $dir ) {
 
@@ -162,16 +165,10 @@ final class ExtraColumns extends AC\Plugin {
 	 */
 	public function get_available_extra_columns() {
 		if ( ! $this->columns ) {
-
 			$this->set_available_extra_columns();
-
 		}
 
 		return $this->columns;
-	}
-
-	public function get_active_extra_columns() {
-		return get_option( Admin\Page\ExperimentalColumns::SETTINGS_NAME );
 	}
 
 }
