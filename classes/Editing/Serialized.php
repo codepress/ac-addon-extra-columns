@@ -6,6 +6,7 @@ namespace ACA\ExtraColumns\Editing;
 use AC\Request;
 use ACP\Editing\Service;
 use ACP\Editing\Storage;
+use ACP\Editing\Value\Data;
 use ACP\Editing\View\Text;
 
 class Serialized implements Service {
@@ -32,9 +33,8 @@ class Serialized implements Service {
 			: false;
 	}
 
-	public function update( Request $request ) {
-		$value = $request->get( 'value' );
-		$id = (int) $request->get( 'id' );
+	public function update( int $id, Data $data ) {
+		$value = $data->get_value();
 
 		// Get the stored serialized data
 		$values = (array) $this->storage->get( $id );
