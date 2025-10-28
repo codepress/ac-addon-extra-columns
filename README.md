@@ -1,4 +1,9 @@
 # Admin Columns Experimental Columns
+
+> ## **DEPRECATED - DO NOT USE**
+>
+> This plugin is deprecated and no longer maintained. It is **not compatible** with Admin Columns Pro 5.0 and later versions. Please uninstall this plugin.
+
 Add-on for Admin Columns Pro that contains custom column for experimental use.
 
 
