@@ -9,33 +9,27 @@ Text Domain: 		codepress-admin-columns
 */
 
 use AC\Autoloader;
+use AC\Entity\Plugin;
 use AC\Plugin\Version;
-use ACA\ExtraColumns\Dependencies;
+use AC\Vendor\DI\Container;
 use ACA\ExtraColumns\ExtraColumns;
+use ACA\Houzez\Loader;
 
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
+if ( ! defined('ABSPATH')) {
+    exit;
 }
 
-define( 'ACA_EXTRA_COLUMNS_FILE', __FILE__ );
+define('ACA_EXTRA_COLUMNS_FILE', __FILE__);
 
 require_once __DIR__ . '/classes/Dependencies.php';
 
-add_action( 'after_setup_theme', function () {
-	$dependencies = new Dependencies( plugin_basename( __FILE__ ), '1.1' );
-	$dependencies->requires_acp( '5.6' );
-	$dependencies->requires_php( '5.6.20' );
+add_action('acp/init', static function (Container $container) {
+    $plugin = Plugin::from_plugin_file(__FILE__, new Version('1.0'));
 
-	if ( $dependencies->has_missing() ) {
-		return;
-	}
+    new Loader($plugin, $container);
+});
 
-	Autoloader::instance()->register_prefix( 'ACA\ExtraColumns', __DIR__ . '/classes/' );
-
-	$plugin = ac_addon_extra_columns();
-	$plugin->register();
-} );
-
-function ac_addon_extra_columns() {
-	return new ExtraColumns( __FILE__, new Version( '1.0' ) );
+function ac_addon_extra_columns()
+{
+    return new ExtraColumns(__FILE__, new Version('1.0'));
 }
